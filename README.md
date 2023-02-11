@@ -1,41 +1,33 @@
 # Overview
-
-This repository is template used to create basic NodeJs projects with typescript.
+This repository is template used to create Express APIs with TypeScript.
 
 # Features
-## TypeScript
-This project uses [TypeScript](https://www.typescriptlang.org/) for source files. The project configuration is available
-in the `/tsconfig.json` file (`/tsconfig.build.json` for the build). Compiled JavaScript file are generated in the
-`/dist` directory. Type declarations and source map files generation are enabled.
+## Server Configuration
+Properly defined and type checked server config that can be configured using
+[nconf](https://www.npmjs.com/package/nconf) in TypeScript or via environment variables.
 
-## Logger
-A [Bunyan](https://www.npmjs.com/package/bunyan) logger is included in this project. The logger configuration can be
-edited in `/src/logger/logger.ts`. Code snipplet to use the logger :
+## Powerful logger
+A powerful logger based on [bunyan](https://www.npmjs.com/package/bunyan) that is customizable using the server config.
 
-```TypeScript
-import { logger } from './logger';
+## Endpoint Not Found controller
+This server includes a controller that catches every request made to unknown endpoints and returns a custom 404
+response message.
 
-logger.info('Hello World!');
-```
+## Ping controller
+Simple controller used to ping the server.
 
-## Lint
-This project uses an [ESLint](https://eslint.org/) linter, along with [Prettier](https://prettier.io/) to format the
-code. The configurations for the linting are based on my own predefined ruleset that I use everywhere. See
-[this repository](https://github.com/souyahia/configs) for more info.
+## Internal Server Error middleware
+A middleware that catches errors thrown in the controllers and returns a custom 500 error response message.
 
-To run a lint check, use the following command :
-> `npm run lint`
+## Log middleware
+A middleware that logs incoming requests.
 
-To automatically fix linting errors, run the following command :
-> `npm run lint:fix`
+## Parameter validator middleware
+A middleware that validates incoming requests params using custom defined validators and
+[express-validator](https://www.npmjs.com/package/express-validator).
 
-## Test
-[Jest](https://jestjs.io/) is the testing framework used in this project. The framework is used with the [ts-jest](https://www.npmjs.com/package/ts-jest) to allow the writing and execution of tests in TypeScript without compilation.
+## Async Wrapper
+A wrapper function that can be used to wrap async controller handlers in order to properly catch errors thrown in them.
 
-Jest will execute every test file located in the `/test` directory and ending with `.test.ts`. The coverage report is generated in the LCOV format, and located in the `/coverage` directory.
-
-To run the tests, use the following command :
-> `npm run test`
-
-To run the tests and generate a coverage report, use the following command :
-> `npm run test:coverage`
+## Tests
+Integration tests that run on your real app using [supertest](https://www.npmjs.com/package/supertest).
